@@ -122,11 +122,16 @@ Below are example plots generated with the script:
       <sub>Response Without saturation </sub>
     </td>
     <td align="center">
-        <img src="https://github.com/user-attachments/assets/d5711ae6-3ffa-472c-952a-2195dab0dadf" alt="Response With saturation" width="550"><br>
+        <img src="https://github.com/user-attachments/assets/d5711ae6-3ffa-472c-952a-2195dab0dadf" alt="Response With anti windup" width="550"><br>
       <sub>Response With saturation </sub>
     </td>
   </tr>
 </table>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/3754cb93-b701-40c8-a1e7-902c2dc6c7cc" alt="Complete Prototype Setup - Version 3" width="400">
+</p>
+
 
 ## 📜 License
 MIT License
