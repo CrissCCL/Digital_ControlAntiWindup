@@ -109,22 +109,21 @@ Below are example plots generated with the script:
 <table>
   <tr>
     <td align="center">
-      <img src="https://github.com/user-attachments/assets/2e69e4aa-a990-4001-acc3-faddbced0f4b" alt="Response Without saturation" width="500"><br>
+      <img src="https://github.com/user-attachments/assets/3a9de997-1b47-498b-bae6-3b95c35f6383" alt="Response Without saturation" width="500"><br>
       <sub>Response Without saturation </sub>
     </td>
     <td align="center">
-        <img  src="https://github.com/user-attachments/assets/e0cbebac-2882-4911-8a68-9841a0ec4633" alt="Response With anti windup" width="550"><br>
-      <sub>Response saturation With anti windup </sub>
+        <img  src="https://github.com/user-attachments/assets/ffb78960-307a-4c58-8975-2750e5639931" alt="Response With anti windup" width="550"><br>
+      <sub>Response saturation With antiwindup </sub>
     </td>
   </tr>
 </table>
 
-Response saturation Without anti windup:
+Response saturation Without antiwindup:
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/8a372c35-61a1-4232-9fa8-a367dd3a57b7" alt="Complete Prototype Setup - Version 3" width="400">
+  <img  src="https://github.com/user-attachments/assets/924e9d41-2f22-4565-9cbd-169c3f1cdb28" alt="Response saturation Without antiwindup " width="400">
 </p>
 
 
 ## 📜 License
 MIT License
-
