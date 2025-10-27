@@ -1,0 +1,104 @@
+# 🧪 Digital Control Simulation — First-Order System + Anti-Windup PI
+
+This repository provides a **tutorial-oriented simulation** of a **digital PI control loop** applied to a **first-order system identified via non-parametric methods**.  
+The simulation includes **actuator saturation** and an **anti-windup algorithm using conditional integration**, allowing the user to visualize the same discrete behavior expected on a **microcontroller** (Arduino, Teensy, ESP32, etc.).
+
+> ⚠️ **Note:** This tutorial is for **educational purposes only**, focusing on understanding discrete-time digital control, actuator limits, and anti-windup strategies.
+
+## 🎯 Goals
+
+- Model a first-order process identified experimentally (non-parametric fit)  
+- Discretize the plant using Zero-Order Hold (ZOH)  
+- Implement a **discrete PI controller in incremental form**  
+- Include **saturation limits** to emulate real actuator constraints  
+- Add **anti-windup** via **conditional integration**  
+- Observe reference tracking and control signal behavior  
+
+---
+
+## 🧩 System Model
+
+A first-order model without delay was identified experimentally from step-response data:
+
+$$
+G_p(s) = \frac{K}{\tau s + 1}
+$$
+
+Example parameters used in this tutorial:
+
+$$
+G_p(s)= \frac{20}{50s + 1}, \quad T_s = 0.1 \text{ s}
+$$
+
+Discretized with **Zero-Order Hold**.  
+
+Discrete-time implementation:
+
+```matlab
+y(k) = num(2)*u1 - den(2)*y1;
+```
+
+## ⚙️ Digital PI Controller (Incremental Form)
+
+The PI control law in **incremental form** is expressed as:
+
+$$
+u(k) = u(k-1) + K_p \,[\, e(k) - e(k-1) \,] + \frac{K_p T_s}{2 T_i} \sum \text{error terms}
+$$
+
+Where the parameters are:
+
+- **Proportional gain:** \(K_p = 0.8\)  
+- **Integral time:** \(T_i = 9\)  
+- **Sampling time:** \(T_s = 0.1 \, \text{s}\)
+
+## 🔒 Anti-Windup via Conditional Integration
+
+To prevent integrator wind-up when the actuator saturates, a **conditional integration scheme** is applied:
+
+- Only integrate the error when the control output is **not saturated** or when the error would **reduce the saturation**.
+- Otherwise, the integral term is **frozen**.
+
+Mathematically:
+
+$$
+\Delta I = e(k) + e(k-1)
+$$
+
+$$
+\text{if } (u \ge U_{\max} \text{ and } e>0) \text{ or } (u \le U_{\min} \text{ and } e<0), \quad \text{then } I = 0
+$$
+
+$$
+\text{else } I = \Delta I
+$$
+
+Where:  
+- \(u\) is the controller output  
+- \(e(k)\) is the current error  
+- \(I\) is the integral sum term  
+
+---
+
+## 🔒 Actuator Saturation
+
+To emulate **real actuator limits** in microcontrollers, the control output is **constrained**:
+
+$$
+U_{\min} \le u(k) \le U_{\max}
+$$
+
+Where in the example:  
+- \(U_{\min} = 0\)  
+- \(U_{\max} = 100\)  
+
+This ensures that the controller output never exceeds the physical limits of the actuator (e.g., PWM 0–100%).
+
+In MATLAB/Simulink:
+
+```matlab
+if u > Umax
+    u = Umax;
+elseif u < Umin
+    u = Umin;
+end
