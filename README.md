@@ -43,8 +43,17 @@ y(k) = num(2)*u1 - den(2)*y1;
 The PI control law in **incremental form** is expressed as:
 
 $$
-u(k) = u(k-1) + K_p \,[\, e(k) - e(k-1) \,] + \frac{K_p T_s}{2 T_i}\,[\, e(k) + e(k-1) \,]
+u(k) = u(k-1) + K_p [ e(k) - e(k-1) ] + \frac{K_p T_s}{2 T_i}[ e(k) + e(k-1)]
 $$
+
+$$
+\Delta I = e(k) + e(k-1)
+$$
+
+$$
+u(k) = u(k-1) + K_p [ e(k) - e(k-1) ] + \frac{K_p T_s}{2 T_i}[ e(k) + e(k-1)]\Delta I
+$$
+
 
 With tuning parameters derived from:
 - Proportional gain: $$K_p$$
@@ -59,11 +68,6 @@ To prevent integrator wind-up when the actuator saturates, a **conditional integ
 - Otherwise, the integral term is **frozen**.
 
 Mathematically:
-
-$$
-\Delta I = e(k) + e(k-1)
-$$
-
 $$
 \text{if } (u \ge U_{\max} \text{ and } e>0) \text{ or } (u \le U_{\min} \text{ and } e<0), \quad \text{then } I = 0
 $$
@@ -73,11 +77,19 @@ $$
 $$
 
 Where:  
-- \(u\) is the controller output  
-- \(e(k)\) is the current error  
-- \(I\) is the integral sum term  
+- $$u$$ is the controller output  
+- $$e(k)$$is the current error  
+- $$I$$ is the integral sum term  
 
----
+```matlab
+    deltaI=(error+error1);
+    if u>=100 && error>0 || u<=0 && error<0
+        Intsum=0;
+    else
+        Intsum=deltaI;
+    end
+     u  =u1+ Kp*error-Kp*error1+Kp*Ts/(Ti*2)*Intsum;
+```
 
 ## 🔒 Actuator Saturation
 
@@ -96,8 +108,10 @@ This ensures that the controller output never exceeds the physical limits of the
 In MATLAB/Simulink:
 
 ```matlab
-if u > Umax
-    u = Umax;
-elseif u < Umin
-    u = Umin;
+if u > 100
+    u=100;
 end
+if u< 0
+    u=0;
+end
+```
