@@ -100,10 +100,6 @@ $$
 U_{\min} \le u(k) \le U_{\max}
 $$
 
-Where in the example:  
-- \(U_{\min} = 0\)  
-- \(U_{\max} = 100\)  
-
 This ensures that the controller output never exceeds the physical limits of the actuator (e.g., PWM 0–100%).
 
 In MATLAB/Simulink:
