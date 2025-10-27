@@ -9,7 +9,7 @@ The simulation includes **actuator saturation** and an **anti-windup algorithm u
 
 - Model a first-order process identified experimentally (non-parametric fit)  
 - Discretize the plant using Zero-Order Hold (ZOH)  
-- Implement a **discrete PI controller in incremental form**  
+- Implement a **discrete PI controller in positional form**  
 - Include **saturation limits** to emulate real actuator constraints  
 - Add **anti-windup** via **conditional integration**  
 - Observe reference tracking and control signal behavior  
