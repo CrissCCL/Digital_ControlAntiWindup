@@ -68,6 +68,7 @@ To prevent integrator wind-up when the actuator saturates, a **conditional integ
 - Otherwise, the integral term is **frozen**.
 
 Mathematically:
+
 $$
 \text{if } (u \ge U_{\max} \text{ and } e>0) \text{ or } (u \le U_{\min} \text{ and } e<0), \quad \text{then } I = 0
 $$
