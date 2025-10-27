@@ -14,8 +14,6 @@ The simulation includes **actuator saturation** and an **anti-windup algorithm u
 - Add **anti-windup** via **conditional integration**  
 - Observe reference tracking and control signal behavior  
 
----
-
 ## 🧩 System Model
 
 A first-order model without delay was identified experimentally from step-response data:
@@ -82,7 +80,7 @@ if (u>=100 && e>0) || (u<=0 && e<0)
 else
     I = I + Ts*e;
 end
-``
+```
 
 ## 🔒 Actuator Saturation
 
