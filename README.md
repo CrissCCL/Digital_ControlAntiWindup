@@ -60,7 +60,7 @@ Therefore, in incremental PI controllers, explicit anti-windup logic is **not re
 In contrast, the **positional PI** form computes:
 
 $$
-u(k)=K_p e(k)+K_p T_i \cdot I(k)
+u(k)=K_p e(k)+\frac{K_p}{ T_i} \cdot I(k)
 $$
 
 Where the term  
