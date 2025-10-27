@@ -37,60 +37,52 @@ Discrete-time implementation:
 ```matlab
 y(k) = num(2)*u1 - den(2)*y1;
 ```
+## 🧠 Why the Incremental PI Form Does Not Need Anti-Windup
 
-## ⚙️ Digital PI Controller (Incremental Form)
-
-The PI control law in **incremental form** is expressed as:
-
-$$
-u(k) = u(k-1) + K_p [ e(k) - e(k-1) ] + \frac{K_p T_s}{2 T_i}[ e(k) + e(k-1)]
-$$
-Where Trapezoidal sum part is,
-$$
-\Delta I = e(k) + e(k-1)
-$$
+When implementing a PI in **incremental form**, the integral action appears **only as a difference between errors** and **is not accumulated explicitly**. The control law is:
 
 $$
-u(k) = u(k-1) + K_p [ e(k) - e(k-1) ] + \frac{K_p T_s}{2 T_i}\Delta I
+u(k)=u(k-1) + K_0e(k) + K_1 e(k-1)
 $$
 
+This form **does not integrate the error in an accumulating memory**, but instead adjusts the control from the last value.  
+Because the controller does **not store the integral sum**, once saturation is applied:
 
-With tuning parameters derived from:
-- Proportional gain: $$K_p$$
-- Integral time: $$T_i$$
-- Sampling time: $$T_s$$
+- The incremental update is naturally “cut off”
+- No further accumulation occurs beyond limits
+- There is no wind-up phenomenon to correct
 
-## 🔒 Anti-Windup via Conditional Integration
+Therefore, in incremental PI controllers, explicit anti-windup logic is **not required** — saturation alone is sufficient.
 
-To prevent integrator wind-up when the actuator saturates, a **conditional integration scheme** is applied:
 
-- Only integrate the error when the control output is **not saturated** or when the error would **reduce the saturation**.
-- Otherwise, the integral term is **frozen**.
+## 🎛️ Positional PI With Conditional Anti-Windup
 
-Mathematically:
-
-$$
-\text{if } (u \ge U_{\max} \text{ and } e>0) \text{ or } (u \le U_{\min} \text{ and } e<0), \quad \text{then } I = 0
-$$
+In contrast, the **positional PI** form computes:
 
 $$
-\text{else } I = \Delta I
+u(k)=K_p e(k)+K_p T_i \cdot I(k)
 $$
 
-Where:  
-- $$u$$ is the controller output  
-- $$e(k)$$ is the current error  
-- $$I$$ is the integral sum term  
+Where the term  
+
+$$
+I(k)=\sum e(k) T_s
+$$  
+
+**does accumulate over time**. If the actuator saturates, the integral would continue growing and later produce large overshoot when saturation exits — this is the classical **integrator wind-up**.
+
+To prevent it, **conditional integration** is used:
+
+- Integrate only when the control is not saturated, **or**
+- When the error would help the controller exit saturation
 
 ```matlab
-    deltaI=(error+error1);
-    if u>=100 && error>0 || u<=0 && error<0
-        Intsum=0;
-    else
-        Intsum=deltaI;
-    end
-     u  =u1+ Kp*error-Kp*error1+Kp*Ts/(Ti*2)*Intsum;
-```
+if (u>=100 && e>0) || (u<=0 && e<0)
+    I = I;       % Freeze integrator
+else
+    I = I + Ts*e;
+end
+``
 
 ## 🔒 Actuator Saturation
 
