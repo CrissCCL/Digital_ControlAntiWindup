@@ -43,14 +43,13 @@ y(k) = num(2)*u1 - den(2)*y1;
 The PI control law in **incremental form** is expressed as:
 
 $$
-u(k) = u(k-1) + K_p \,[\, e(k) - e(k-1) \,] + \frac{K_p T_s}{2 T_i} \sum \text{error terms}
+u(k) = u(k-1) + K_p \,[\, e(k) - e(k-1) \,] + \frac{K_p T_s}{2 T_i}\,[\, e(k) + e(k-1) \,]
 $$
 
-Where the parameters are:
-
-- **Proportional gain:** \(K_p = 0.8\)  
-- **Integral time:** \(T_i = 9\)  
-- **Sampling time:** \(T_s = 0.1 \, \text{s}\)
+With tuning parameters derived from:
+- Proportional gain: $$K_p$$
+- Integral time: $$T_i$$
+- Sampling time: $$T_s$$
 
 ## 🔒 Anti-Windup via Conditional Integration
 
