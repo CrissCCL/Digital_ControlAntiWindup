@@ -80,6 +80,7 @@ if (u>=100 && e>0) || (u<=0 && e<0)
 else
     I = I + Ts*e;
 end
+u = Kp*e + Kp/Ti*I;
 ```
 
 ## 🔒 Actuator Saturation
@@ -112,14 +113,15 @@ Below are example plots generated with the script:
       <sub>Response Without saturation </sub>
     </td>
     <td align="center">
-        <img src="https://github.com/user-attachments/assets/d5711ae6-3ffa-472c-952a-2195dab0dadf" alt="Response With anti windup" width="550"><br>
-      <sub>Response With saturation </sub>
+        <img  src="https://github.com/user-attachments/assets/e0cbebac-2882-4911-8a68-9841a0ec4633" alt="Response With anti windup" width="550"><br>
+      <sub>Response saturation With anti windup </sub>
     </td>
   </tr>
 </table>
 
+Response saturation Without anti windup:
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/3754cb93-b701-40c8-a1e7-902c2dc6c7cc" alt="Complete Prototype Setup - Version 3" width="400">
+  <img src="https://github.com/user-attachments/assets/8a372c35-61a1-4232-9fa8-a367dd3a57b7" alt="Complete Prototype Setup - Version 3" width="400">
 </p>
 
 
