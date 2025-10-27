@@ -112,3 +112,22 @@ if u< 0
     u=0;
 end
 ```
+
+Below are example plots generated with the script:
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/2e69e4aa-a990-4001-acc3-faddbced0f4b" alt="Response Without saturation" width="500"><br>
+      <sub>Response Without saturation </sub>
+    </td>
+    <td align="center">
+        <img src="https://github.com/user-attachments/assets/d5711ae6-3ffa-472c-952a-2195dab0dadf" alt="Response With saturation" width="550"><br>
+      <sub>Response With saturation </sub>
+    </td>
+  </tr>
+</table>
+
+## 📜 License
+MIT License
+
