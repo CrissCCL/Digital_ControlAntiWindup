@@ -51,7 +51,7 @@ $$
 $$
 
 $$
-u(k) = u(k-1) + K_p [ e(k) - e(k-1) ] + \frac{K_p T_s}{2 T_i}[ e(k) + e(k-1)]\Delta I
+u(k) = u(k-1) + K_p [ e(k) - e(k-1) ] + \frac{K_p T_s}{2 T_i}\Delta I
 $$
 
 
