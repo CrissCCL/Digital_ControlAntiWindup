@@ -45,7 +45,7 @@ The PI control law in **incremental form** is expressed as:
 $$
 u(k) = u(k-1) + K_p [ e(k) - e(k-1) ] + \frac{K_p T_s}{2 T_i}[ e(k) + e(k-1)]
 $$
-
+Where Trapezoidal sum part is,
 $$
 \Delta I = e(k) + e(k-1)
 $$
@@ -78,7 +78,7 @@ $$
 
 Where:  
 - $$u$$ is the controller output  
-- $$e(k)$$is the current error  
+- $$e(k)$$ is the current error  
 - $$I$$ is the integral sum term  
 
 ```matlab
