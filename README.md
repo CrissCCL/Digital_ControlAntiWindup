@@ -32,9 +32,16 @@ Discretized with **Zero-Order Hold**.
 
 Discrete-time implementation:
 
-```matlab
+Matlab
+```Matlab
 y(k) = num(2)*u1 - den(2)*y1;
 ```
+Python
+```Python
+y[k] = b1 * u - a1 * y1
+```
+
+
 ## 🧠 Why the Incremental PI Form Does Not Need Anti-Windup
 
 When implementing a PI in **incremental form**, the integral action appears **only as a difference between errors** and **is not accumulated explicitly**. The control law is:
@@ -74,13 +81,23 @@ To prevent it, **conditional integration** is used:
 - Integrate only when the control is not saturated, **or**
 - When the error would help the controller exit saturation
 
-```matlab
+Matlab
+```Matlab
 if (u>=100 && e>0) || (u<=0 && e<0)
     I = I;       % Freeze integrator
 else
     I = I + Ts*e;
 end
 u = Kp*e + Kp/Ti*I;
+```
+Python
+```Python
+if (u >= 100 and e > 0) or (u <= 0 and e < 0):
+    I = I
+else:
+    I = I + Ts * e
+
+u = Kp * e + (Kp / Ti) * I
 ```
 
 ## 🔒 Actuator Saturation
@@ -93,15 +110,21 @@ $$
 
 This ensures that the controller output never exceeds the physical limits of the actuator (e.g., PWM 0–100%).
 
-In MATLAB/Simulink:
-
-```matlab
+Matlab
+```Matlab
 if u > 100
     u=100;
 end
 if u< 0
     u=0;
 end
+```
+Python
+```Python
+if u > 100:
+    u = 100
+if u < 0:
+    u = 0
 ```
 
 Below are example plots generated with the script:
