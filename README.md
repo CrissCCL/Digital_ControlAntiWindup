@@ -1,5 +1,13 @@
 # 🧪 Digital Control Simulation — First-Order System + Anti-Windup PI
 
+![MATLAB](https://img.shields.io/badge/MATLAB-Simulation-blue)
+![Python](https://img.shields.io/badge/Python-Analysis-green)
+![Control](https://img.shields.io/badge/Control-Anti--Windup-orange)
+![PID](https://img.shields.io/badge/PID-Implementation-green)
+![Robustness](https://img.shields.io/badge/Robustness-Actuator%20Limits-lightgrey)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
+
+
 This repository provides a **tutorial-oriented simulation** of a **digital PI control loop** applied to a **first-order system identified via non-parametric methods**.  
 The simulation includes **actuator saturation** and an **anti-windup algorithm using conditional integration**, allowing the user to visualize the same discrete behavior expected on a **microcontroller** (Arduino, Teensy, ESP32, etc.).
 
